@@ -105,48 +105,48 @@ package
 				{
 					if (!shotgun)
 					{
+						var radians:Number=(img.angle+90)*Math.PI/180;
+						var distance:Number=1000; // this assumed to have a minimum of 1.0, adjust as needed.
+						// 1000 is the distance to surely end the bullet outside the stage
+						var dx:Number=distance*Math.cos(radians);
+						var dy:Number=-1*distance*Math.sin(radians);
+
 						var bullet:Bullet = new Bullet(x, y);
 						GameWorld.ref.add(bullet);
 						var dist:Number = Math.sqrt((Input.mouseX - x) * (Input.mouseX - x) + (Input.mouseY - y) * (Input.mouseY - y));
-						TweenMax.to(bullet, dist / bullet.speed, { x:x + (Input.mouseX - x) * 10, y:y + (Input.mouseY - y) * 10 } );
+						TweenMax.to(bullet, dist / bullet.speed, { x:x + dx , y:y + dy  } );
 						canShoot = false;
 						TweenMax.delayedCall(fireRate, setCanShoot);
 					}
 					else
 					{
-						var modifx:int;
-						var modify:int;
+						/*       Bullet 1      */
+						var bullet1:Bullet = new Bullet(x, y);
+						GameWorld.ref.add(bullet1);
+						var radians:Number=(img.angle+90)*Math.PI/180;
+						var distance:Number=2000; // this assumed to have a minimum of 1.0, adjust as needed.
+						// 1000 is the distance to surely end the bullet outside the stage
+						var dx:Number=distance*Math.cos(radians);
+						var dy:Number=-1*distance*Math.sin(radians);
+						var dist:Number = Math.sqrt((Input.mouseX - x) * (Input.mouseX - x) + (Input.mouseY - y) * (Input.mouseY - y));
+						TweenMax.to(bullet1, dist / bullet1.speed, { x:x + dx, y:y + dy} );
 						
-						/*if (!((Input.mouseX > x) && (Input.mouseY < y)) || ((Input.mouseX < x) && (Input.mouseY > y )))
-						{
-							var bullet1:Bullet = new Bullet(x, y);
-							GameWorld.ref.add(bullet1);
-							var dist:Number = Math.sqrt((Input.mouseX - x) * (Input.mouseX - x) + (Input.mouseY - y) * (Input.mouseY - y));
-							TweenMax.to(bullet1, dist / bullet1.speed, { x:x + (Input.mouseX - x) * 10, y:y + (Input.mouseY - y) * 10 } );
-							
-							var bullet2:Bullet = new Bullet(x, y);
-							GameWorld.ref.add(bullet2);
-							TweenMax.to(bullet2, dist / bullet2.speed, { x:x + (Input.mouseX - x+(Input.mouseX/800)*100) * 10, y:y + (Input.mouseY - y-(Input.mouseY/600)*100) * 10 } );
-							
-							var bullet3:Bullet = new Bullet(x, y);
-							GameWorld.ref.add(bullet3);
-							TweenMax.to(bullet3, dist / bullet3.speed, { x:x + (Input.mouseX - x-(Input.mouseX/800)*100) * 10, y:y + (Input.mouseY - y+(Input.mouseY/600)*100) * 10 } );
-						}
-						else 
-						{*/
-							var bullet1:Bullet = new Bullet(x, y);
-							GameWorld.ref.add(bullet1);
-							var dist:Number = Math.sqrt((Input.mouseX - x) * (Input.mouseX - x) + (Input.mouseY - y) * (Input.mouseY - y));
-							TweenMax.to(bullet1, dist / bullet1.speed, { x:x + (Input.mouseX - x) * 10, y:y + (Input.mouseY - y) * 10 } );
-							
-							var bullet2:Bullet = new Bullet(x, y);
-							GameWorld.ref.add(bullet2);
-							TweenMax.to(bullet2, dist / bullet2.speed, { x:x + (Input.mouseX- x+(Input.mouseX/800)*100) * 10, y:y + (Input.mouseY - y+(Input.mouseY/600)*100) * 10 } );
-							
-							var bullet3:Bullet = new Bullet(x, y);
-							GameWorld.ref.add(bullet3);
-							TweenMax.to(bullet3, dist / bullet3.speed, { x:x + (Input.mouseX - x-(Input.mouseX/800)*100) * 10, y:y + (Input.mouseY - y-(Input.mouseY/600)*100) * 10 } );
-						//}
+						/*       Bullet 2      */
+						radians = (img.angle+100) * Math.PI / 180;
+						dx=distance*Math.cos(radians);
+						dy=-1*distance*Math.sin(radians);
+						var bullet2:Bullet = new Bullet(x, y);
+						GameWorld.ref.add(bullet2);
+						TweenMax.to(bullet2, dist / bullet2.speed, { x:x + dx, y:y + dy} );
+						
+						/*       Bullet 3      */
+						radians = (img.angle+80) * Math.PI / 180;
+						dx=distance*Math.cos(radians);
+						dy=-1*distance*Math.sin(radians);
+						var bullet3:Bullet = new Bullet(x, y);
+						GameWorld.ref.add(bullet3);
+						TweenMax.to(bullet3, dist / bullet3.speed, { x:x + dx, y:y + dy} );
+					
 						canShoot = false;
 						TweenMax.delayedCall(0.5, setCanShoot);
 					}
