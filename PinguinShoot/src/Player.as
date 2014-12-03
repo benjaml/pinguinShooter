@@ -1,6 +1,7 @@
 package  
 {
 	import com.greensock.TweenMax;
+	import flash.geom.Point;
 	import flash.system.System;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
@@ -105,16 +106,18 @@ package
 				{
 					if (!shotgun)
 					{
-						var radians:Number=(img.angle+90)*Math.PI/180;
-						var distance:Number=1000; // this assumed to have a minimum of 1.0, adjust as needed.
+						var rando:Number = Math.random() * 20;
+						var radians:Number=(img.angle+80+rando)*Math.PI/180;
+						var distance:Number=3000; // this assumed to have a minimum of 1.0, adjust as needed.
 						// 1000 is the distance to surely end the bullet outside the stage
 						var dx:Number=distance*Math.cos(radians);
 						var dy:Number=-1*distance*Math.sin(radians);
 
 						var bullet:Bullet = new Bullet(x, y);
+						bullet.destination = new Point(x + dx,y+dy);
+						bullet.ShootDuration = distance / bullet.speed;
 						GameWorld.ref.add(bullet);
-						var dist:Number = Math.sqrt((Input.mouseX - x) * (Input.mouseX - x) + (Input.mouseY - y) * (Input.mouseY - y));
-						TweenMax.to(bullet, dist / bullet.speed, { x:x + dx , y:y + dy  } );
+						TweenMax.to(bullet, distance / bullet.speed, { x:x + dx , y:y + dy  } );
 						canShoot = false;
 						TweenMax.delayedCall(fireRate, setCanShoot);
 					}
@@ -122,31 +125,51 @@ package
 					{
 						/*       Bullet 1      */
 						var bullet1:Bullet = new Bullet(x, y);
-						GameWorld.ref.add(bullet1);
 						var radians:Number=(img.angle+90)*Math.PI/180;
 						var distance:Number=2000; // this assumed to have a minimum of 1.0, adjust as needed.
 						// 1000 is the distance to surely end the bullet outside the stage
 						var dx:Number=distance*Math.cos(radians);
-						var dy:Number=-1*distance*Math.sin(radians);
-						var dist:Number = Math.sqrt((Input.mouseX - x) * (Input.mouseX - x) + (Input.mouseY - y) * (Input.mouseY - y));
-						TweenMax.to(bullet1, dist / bullet1.speed, { x:x + dx, y:y + dy} );
+						var dy:Number = -1 * distance * Math.sin(radians);
+						bullet1.destination = new Point(x + dx,y+dy);
+						bullet1.ShootDuration = distance / bullet1.speed;
+						GameWorld.ref.add(bullet1);
+						TweenMax.to(bullet1, distance / bullet1.speed, { x:x + dx, y:y + dy} );
 						
 						/*       Bullet 2      */
 						radians = (img.angle+100) * Math.PI / 180;
 						dx=distance*Math.cos(radians);
 						dy=-1*distance*Math.sin(radians);
 						var bullet2:Bullet = new Bullet(x, y);
+						bullet2.destination = new Point(x + dx,y+dy);
 						GameWorld.ref.add(bullet2);
-						TweenMax.to(bullet2, dist / bullet2.speed, { x:x + dx, y:y + dy} );
+						TweenMax.to(bullet2, distance / bullet2.speed, { x:x + dx, y:y + dy} );
+						
+						/*       Bullet 4      */
+						radians = (img.angle+85) * Math.PI / 180;
+						dx=distance*Math.cos(radians);
+						dy=-1*distance*Math.sin(radians);
+						var bullet4:Bullet = new Bullet(x, y);
+						bullet4.destination = new Point(x + dx,y+dy);
+						GameWorld.ref.add(bullet4);
+						TweenMax.to(bullet4, distance / bullet4.speed, { x:x + dx, y:y + dy} );
+					
+						/*       Bullet 5      */
+						radians = (img.angle+95) * Math.PI / 180;
+						dx=distance*Math.cos(radians);
+						dy=-1*distance*Math.sin(radians);
+						var bullet5:Bullet = new Bullet(x, y);
+						bullet5.destination = new Point(x + dx,y+dy);
+						GameWorld.ref.add(bullet5);
+						TweenMax.to(bullet5, distance / bullet5.speed, { x:x + dx, y:y + dy } );
 						
 						/*       Bullet 3      */
 						radians = (img.angle+80) * Math.PI / 180;
 						dx=distance*Math.cos(radians);
 						dy=-1*distance*Math.sin(radians);
 						var bullet3:Bullet = new Bullet(x, y);
+						bullet3.destination = new Point(x + dx,y+dy);
 						GameWorld.ref.add(bullet3);
-						TweenMax.to(bullet3, dist / bullet3.speed, { x:x + dx, y:y + dy} );
-					
+						TweenMax.to(bullet3, distance / bullet3.speed, { x:x + dx, y:y + dy} );
 						canShoot = false;
 						TweenMax.delayedCall(0.5, setCanShoot);
 					}
