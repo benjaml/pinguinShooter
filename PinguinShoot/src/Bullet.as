@@ -1,6 +1,7 @@
 package  
 {
 	import com.greensock.TweenMax;
+	import flash.geom.Point;
 	import net.flashpunk.Entity;
 	import net.flashpunk.Graphic;
 	import net.flashpunk.graphics.Image;
@@ -14,10 +15,15 @@ package
 	{
 		
 		public var speed:Number;
+		public var TimeCreate:Number;
+		public var ShootDuration:Number;
+		public var destination:Point;
+		
 		public function Bullet(x:Number=0, y:Number=0, graphic:Graphic=null, mask:Mask=null) 
 		{
 			super(x, y, graphic, mask);
-			speed = 50;
+			speed = 500;
+			
 		}
 		override public function added():void
 		{
