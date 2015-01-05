@@ -11,15 +11,16 @@ package
 	 * ...
 	 * @author benjamin LEFEVRE
 	 */
-	public class Bullet extends Entity 
+	public class BulletIA extends Entity 
 	{
 		
 		public var speed:Number;
 		public var TimeCreate:Number;
 		public var ShootDuration:Number;
 		public var destination:Point;
+		public var tag:String;
 		
-		public function Bullet(x:Number=0, y:Number=0, graphic:Graphic=null, mask:Mask=null) 
+		public function BulletIA(x:Number=0, y:Number=0, graphic:Graphic=null, mask:Mask=null) 
 		{
 			super(x, y, graphic, mask);
 			speed = 500;

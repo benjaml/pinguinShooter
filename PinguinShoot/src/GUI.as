@@ -26,7 +26,7 @@ package
 			graphic = text;
 			
 		}
-		public function setText(value:String)
+		public function setText(value:String):void
 		{
 			text.text = value;
 		}

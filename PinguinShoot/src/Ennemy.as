@@ -82,14 +82,15 @@ package
 					}
 				}
 			}
-			if (collide("bullet", x, y))
+			var bullet:Bullet = collide("bullet", x, y) as Bullet;
+			if (bullet)
 			{
 				this.knockdown = true;
 				var bul:Bullet = collide("bullet", x, y) as Bullet
 				pointDeVie--;
-				GameWorld.ref.recycle(bul);
+				GameWorld.ref.remove(bul);
 				if (pointDeVie == 0) {
-					GameWorld.ref.recycle(this);
+					GameWorld.ref.remove(this);
 				}
 				var dx:Number = bul.destination.x - x;
 				var dy:Number = bul.destination.y - y;
@@ -107,8 +108,10 @@ package
 					dy = dy / 100;
 					trace("" + dx + "    " + dy);
 					TweenMax.killTweensOf(this);
-					TweenMax.to(this, Math.sqrt((dx) * (dx) + (dy) * (dy)) / bul.speed, { x:x + dx , y:y +dy  } );				}
+					TweenMax.to(this, Math.sqrt((dx) * (dx) + (dy) * (dy)) / bul.speed, { x:x + dx , y:y +dy  } );				
 					TweenMax.delayedCall((Math.sqrt((dx) * (dx) + (dy) * (dy)) / bul.speed),resetKnockBack );
+				}
+			
 			}
 			
 			

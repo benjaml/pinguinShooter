@@ -22,6 +22,7 @@ package
 		var img:Image;
 		var canShoot:Boolean;
 		public var katana:Boolean;
+		public var katanaMode:Boolean;
 		public var shotgun:Boolean;
 	
 		
@@ -42,7 +43,7 @@ package
 			img.centerOrigin();
 			graphic = img;
 			
-			setHitbox(img.width, img.height,img.width/2, img.height/2);
+			setHitbox(img.width, img.height,img.width/2, img.width/2);
 			type = "player";
 			
 		}
@@ -51,43 +52,52 @@ package
 		override public function update():void
 		{
 			super.update();
-			if (!katana)
+			if (!katanaMode)
 			{
 				LookAtMouse();
 			}
 			//Input.check détecte si la touche est enfoncé, plus pour les déplacement et Input.pressed détecte l'action d'appuyer
 			if (Input.check(Key.D))
 			{
-				if (!collide("wall", x+speed, y))
+				if (x < 800-speed)
 				{
 					x += speed;	
 				}
 			}
 			if (Input.check(Key.Q))
 			{
-				if (!collide("wall", x-speed, y))
+				if (x > speed)
 				{
 					x -= speed;	
 				}
 			}
 			if (Input.check(Key.Z))
 			{
-				if (!collide("wall", x, y-speed))
+				if (y > speed)
 				{
 					y -= speed;	
 				}
 			}
 			if (Input.check(Key.S))
 			{
-				if (!collide("wall", x, y+speed))
+				if (y < 600-speed)
 				{
 					y += speed;	
 				}
 			}
+			var bulletia:BulletIA = collide("bullet", x, y) as BulletIA;
+			if (bulletia) {
+				GameWorld.ref.remove(bulletia);
+				GameWorld.ref.remove(this);
+				GameWorld.ref.remove(GameWorld.ref.boss);
+				TweenMax.killDelayedCallsTo(GameWorld.ref.boss);
+				FP.world = new MainMenuWorld();
+	
+			}
 			var ennemy:Ennemy = collide("ennemy", x, y) as Ennemy;
 			if (ennemy != null)
 			{
-				if (katana)
+				if (katanaMode)
 				{
 					/*ennemy.pointDeVie = 0;
 					GameWorld.ref.remove(ennemy);*/
@@ -188,19 +198,23 @@ package
 			}
 			
 			if (Input.pressed(Key.SPACE))
-			{
-				var nb:int = 0;
-				for (var i:int = 0; i < GameWorld.ref.ennemys.length; i++)
+			{	
+				if (katana)
 				{
-					if (GameWorld.ref.ennemys[i].pointDeVie > 0)
+					var nb:int = 0;
+					katanaMode = true;
+					for (var i:int = 0; i < GameWorld.ref.ennemys.length; i++)
 					{
-						TweenMax.delayedCall(0.1*nb, killAllEnnemy,[GameWorld.ref.ennemys[i]]);
-						katana = true;
-						GameWorld.ref.ennemys[i].speed = 0; 
-						GameWorld.ref.freeze = true;
-						nb++;
-						if (i == GameWorld.ref.ennemys.length - 1)
-							TweenMax.delayedCall(0.2+(0.1*nb), resetCanSpawn);
+						if (GameWorld.ref.ennemys[i].pointDeVie > 0)
+						{
+							TweenMax.delayedCall(0.1*nb, killAllEnnemy,[GameWorld.ref.ennemys[i]]);
+							
+							GameWorld.ref.ennemys[i].speed = 0; 
+							GameWorld.ref.freeze = true;
+							nb++;
+							if (i == GameWorld.ref.ennemys.length - 1)
+								TweenMax.delayedCall(0.2+(0.1*nb), resetCanSpawn);
+						}
 					}
 				}
 			}
@@ -218,13 +232,14 @@ package
 		{
 
 			img.angle = FP.angle(x, y, ennemy.x, ennemy.y) - 90;
-			TweenMax.to(this, 0.1, { x:x + (ennemy.x - x), y:y + (ennemy.y - y) } );					
+			TweenMax.to(this, 0.1, { x:x + (ennemy.x - x), y:y + (ennemy.y - y) } );	
 		
 		}
 		
 		public function resetCanSpawn():void 
 		{
 			GameWorld.ref.freeze = false;
+			katanaMode = false;
 			katana = false;
 			for (var i:int = 0; i < GameWorld.ref.ennemys.length; i++)
 			{

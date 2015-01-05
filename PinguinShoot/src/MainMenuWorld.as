@@ -35,6 +35,9 @@ package
 			test.setText("Press ENTER to continue");
 			if (Input.pressed(Key.ENTER))
 			{
+				//if (GameWorld.ref.boss) {
+					//GameWorld.ref.remove(GameWorld.ref.boss);
+				//}
 				FP.world = new GameWorld();
 			}
 		
