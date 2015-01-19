@@ -16,7 +16,15 @@
     </define>
     <define append="true">
       <name>CONFIG::timeStamp</name>
+<<<<<<< HEAD
       <value>'03/01/2015'</value>
+=======
+<<<<<<< HEAD
+      <value>'04/12/2014'</value>
+=======
+      <value>'02/12/2014'</value>
+>>>>>>> eb1058b458b988829f9f86208af62931af5a2f1b
+>>>>>>> 08ca6eb418eb5b56e69aaee73014ec7624657397
     </define>
     <define append="true">
       <name>CONFIG::air</name>
@@ -32,6 +40,17 @@
     </define>
     <verbose-stacktraces>true</verbose-stacktraces>
     <source-path append="true">
+<<<<<<< HEAD
+      <path-element>C:\Workspace\getPinguinShooter\PinguinShoot\src</path-element>
+      <path-element>C:\Program Files (x86)\FlashDevelop\Library\AS3\classes</path-element>
+    </source-path>
+    <library-path append="true">
+      <path-element>C:\Workspace\getPinguinShooter\PinguinShoot\lib\flashpunk-1.7.2.swc</path-element>
+    </library-path>
+  </compiler>
+  <file-specs>
+    <path-element>C:\Workspace\getPinguinShooter\PinguinShoot\src\Main.as</path-element>
+=======
       <path-element>C:\git\gitPinguinShooter\PinguinShoot\src</path-element>
       <path-element>C:\Program Files (x86)\FlashDevelop\Library\AS3\classes</path-element>
     </source-path>
@@ -41,6 +60,7 @@
   </compiler>
   <file-specs>
     <path-element>C:\git\gitPinguinShooter\PinguinShoot\src\Main.as</path-element>
+>>>>>>> eb1058b458b988829f9f86208af62931af5a2f1b
   </file-specs>
   <default-background-color>#FFFFFF</default-background-color>
   <default-frame-rate>30</default-frame-rate>
